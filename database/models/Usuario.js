@@ -14,6 +14,18 @@ module.exports = function(sequelize, DataTypes){
         }, 
         contra: {
             type: DataTypes.STRING(100)
+        },
+        createdAt: {
+            type: dataTypes.DATE,
+            field: 'createdAt'
+        },
+        updatedAt: {
+            type: dataTypes.DATE,
+            field: 'updatedAt'
+        },
+        deletedAt: {
+            type: dataTypes.DATE,
+            field: 'deletedAt'
         }
     };
     let config = {
