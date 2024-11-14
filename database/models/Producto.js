@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         }, 
         id_delUsuario: {
-            type: dataTypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: true,
             references: {
                 model: 'usuarios', //PREGUNTAR
@@ -16,24 +16,24 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         imagen_producto: {
-            type: dataTypes.TEXT,
+            type: DataTypes.TEXT,
         }, 
         nombre: {
-            type: dataTypes.STRING(70),
+            type: DataTypes.STRING(70),
         },
         descripcion: {
-            type: dataTypes.STRING(200),
+            type: DataTypes.STRING(200),
         },
         createdAt: {
             type: dataTypes.DATE,
             field: 'createdAt'
         },
         updatedAt: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE,
             field: 'updatedAt'
         },
         deletedAt: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE,
             field: 'deletedAt'
         },
     };
