@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     let alias = 'Producto';
-    let columns= {
+    let cols= {
         id_producto: {
             autoIncrement: true,
             primaryKey: true,
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(200),
         },
         createdAt: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE,
             field: 'createdAt'
         },
         updatedAt: {
