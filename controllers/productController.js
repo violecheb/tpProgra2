@@ -1,10 +1,15 @@
 const db = require("../database/models");
-const productos = db.Producto;
+const products = db.Product;
 const op = db.Sequelize.Op;
 
 let productController = {
     index: function(req,res) {
-        productos.findAll()
+        products.findAll({include: [
+            {association: "users"}
+        ]}, 
+        {order:[
+            ["createdAt", "DESC"],
+        ]})
         .then(function(result){
             return res.render("products", {products: result})
         })
@@ -14,9 +19,11 @@ let productController = {
     },
     detail: function(req,res) {
         let id = req.params.id;
-        productos.findByPk(id)
+        products.findByPk(id, {include: [
+            {association: "users"}
+        ]})
         .then(function(result){
-            return res.send(result)
+            return res.render("product", {product: result})
         })
         .catch(function(err){
             return console.log(err)
@@ -26,7 +33,7 @@ let productController = {
         res.send("hola")
     },
     search: function(req,res) {
-        res.send(productos)
+        res.send(products)
     }
 }
 
