@@ -11,10 +11,10 @@ const userController = {
     },
     registerPost: function (req,res) {
         let formulario = req.body
-        formulario.password = bcryptjs.hashSync(form.password,10)
+        formulario.contra = bcryptjs.hashSync(formulario.contra,10)
 
         db.Usuario.create(formulario)
-        .then(function (req,res) {
+        .then(function () {
             return res.redirect('/users/login')
         })
         .catch(function (error) {
@@ -35,19 +35,19 @@ const userController = {
         if (formulario.email == "") {
             return res.send('La información en Email es incorrecta')
         } else{
-            if (formulario.password == "") {
+            if (formulario.contra == "") {
                 return res.send('La información de Contraseña es incorrecta')   
                }else{
                 let filtrado = {
-                    where: [{email: form.email},
-                    {password: form.password}]
+                    where: [{email: formulario.email},
+                    {contra: formulario.contra}]
                 }
-                db.Usuario.create(filtrado)
+                db.Usuario.findOne(filtrado)
                 .then(function (result) {
-                        let check = bcryptjs.compareSync(form.password, result.password)
+                        let check = bcryptjs.compareSync(formulario.contra, result.contra)
                         if (check) {
                             req.session.user = result.dataValues;
-                            console.log(req.session.user.name);
+                            
                          return res.redirect('/')
                         }
                 
@@ -58,9 +58,7 @@ const userController = {
                 })
                }
         }
-       
-
-        
+               
     },
     logout: function (req,res) {
        req.session.destroy();

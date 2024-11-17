@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 /* Sufijos registro */
 router.get('/register', userController.register);
-router.get('/register', userController.registerPost);
+router.post('/register', userController.registerPost);
 
 /* Sufijos login */
 router.get ('/login', userController.login);

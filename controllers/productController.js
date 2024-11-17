@@ -5,11 +5,11 @@ const op = db.Sequelize.Op;
 let productController = {
     index: function(req,res) {
         products.findAll({include: [
-            {association: "users"}
-        ]}, 
-        {order:[
-            ["createdAt", "DESC"],
-        ]})
+            {association: "usuario"}
+        ], 
+        order:[
+            ["createdAt", "DESC"]
+    ]})
         .then(function(result){
             return res.render("products", {products: result})
         })
