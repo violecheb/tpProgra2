@@ -10,10 +10,13 @@ router.get("/", productController.index);
 router.get("/detail/:id", productController.detail);
 
 //agregar productos
-router.get("/add", productController.add);
+router.get("/add", productController.addProduct);
 
-//search
-router.get("/search", productController.search);
+// ruta por POST que procesa la información del formulario "agregar producto"
+router.post("/store", productController.storeProduct)
+
+//resultados de busqueda
+router.get("/search", productController.search)
 
 module.exports = router;
 
