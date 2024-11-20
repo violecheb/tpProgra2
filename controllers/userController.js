@@ -47,7 +47,6 @@ const userController = {
                         let check = bcryptjs.compareSync(formulario.contra, result.contra)
                         if (check) {
                             req.session.user = result.dataValues;
-                            
                          return res.redirect('/')
                         }
                 
