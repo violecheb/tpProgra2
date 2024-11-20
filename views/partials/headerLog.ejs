@@ -3,43 +3,45 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-5 col-md-2">
-                <a href="index.html" class="main-header_home-link">
-                    <img src="./images/logo-mercado-liebre.svg">
+                <a href="/products" class="main-header_home-link">
+                    <img src="/imagenes/img-logo.png">
                 </a>
             </div>
 
             <div class="col-7 col-md-6">
-                <form action="" method="GET" class="search-form">
-                    <input type="text" name="search" placeholder="Buscar productos, marcas y más"
-                        class="search-form_input">
+                <form action="/products/search" method="GET" class="search-form">
+                    <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
                     <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
                 </form>
             </div>
 
-            <div class="col-12 col-md-4">
-                <a class="main-header_credit-link">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    Todas las opiniones en un solo lugar.
-                </a>
-            </div>
-        </div>
-
-        <button class="btn-toggle-navbar">
-            <i class="fas fa-bars"></i>
-        </button>
+       	<div class="col-12 col-md-4">
+					<a class="main-header_credit-link">
+						<i class="fas fa-hand-holding-usd"></i>
+						Los mejores precios en maquillaje.
+					</a>
+				</div>
+			</div>
+	
+			<button class="btn-toggle-navbar">
+				<i class="fas fa-bars"></i>
+			</button>
 
         <nav class="main-navbar">
             <ul class="left-navbar">
-                <li><a href="index.html">Todos los productos</a></li>
-                <li><a href="">Cargar productos</a></li>
+                <li><p>Hola <%=locals.user.usuario%> !!! </p></li>
+                <li><a href="/products">Todos los productos</a></li>
+                <li><a href="/products/add">Cargar productos</a></li>
             </ul>
-        
             <ul class="right-navbar">
                             <li> 
-                                Nombre del usuario <i class="fas fa-user"></i>
+                            <a href="/users/perfil/<%=locals.user.id%>"><%=locals.user.usuario%></a>
                             </li>
+                            
+                            <li></li>
+                            <i class="fas fa-user"></i>
                             <li>
-                                <form action="" method="post">
+                                <form action="/users/logout" method="post">
                                     <button class="logout" type="submit">
                                         Cerrar sesión <i class="fas fa-sign-in-alt"></i>
                                     </button>

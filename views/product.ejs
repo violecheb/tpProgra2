@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="/images/logo-mercado-liebre.jpg" />
+	<link width="" rel="shortcut icon" href="/imagenes/img-logo.jpg" />
 
 	<title> Mercado Liebre Argentina</title>
 	<!-- Font Awesome Stylesheet -->
@@ -16,7 +16,11 @@
 </head>
 <body>
 	<!-- Header -->
-    <%- include('./partials/header') %>
+	<% if (locals.user != undefined) {%>
+        <%- include('./partials/headerLog') %>
+    <%} else {%>
+        <%- include('./partials/header') %>
+    <%}%>
 	<!-- /Header -->
 	<!-- product detail -->
 	<div class="container products-wrapper">
@@ -33,48 +37,48 @@
 					<p class="product-detail-description"><%=product.descripcion%></p>
 				</article>
 				<div class="col-12 col-lg-4">
-					<h1>Usuario: <%= product.usuarios.nombre %></h1>
 					<section class="comments">
 						<article>
-							<img src="https://via.placeholder.com/35" alt="">
+							<img src="/imagenes/usuarios/img-user.png" alt="">
 							<div class="data">
 								<p class="user">
-								<strong> <a href="profile.html">Nombre usuario: </a> </strong>
-								 Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora doloribus enim aspernatur fugit corrupti suscipit sit dolore magnam, praesentium explicabo inventore molestias facilis labore. Fugit ipsa mollitia odit inventore consequuntur.</p>
+								<strong> <a href="/users/perfil/<%= product.users.id %>"> <%= product.users.usuario %></a> </strong>
+								<br>
+								<%= product.users.email %></p>
+							</div>
+						</article>
+						<h3 class="data">Comments</h3>
+						<article>
+							<img src="/imagenes/usuarios/img-tini.jpg" alt="">
+							<div class="data">
+								<p class="user">
+									<strong> Tini Stoessel </strong>
+									Muy buen producto ! </p>
 							</div>
 						</article>
 						<article>
-							<img src="https://via.placeholder.com/35" alt="">
+							<img src="/imagenes/usuarios/img-emilia.jpg" alt="">
 							<div class="data">
 								<p class="user">
-									<strong> <a href="profile.html">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur.</p>
-							</div>
-						</article>
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="profile.html">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									<strong> Emilia Mernes </strong>
+									Normal
 									</p>
 							</div>
 						</article>
 						<article>
-							<img src="https://via.placeholder.com/35" alt="">
+							<img src="/imagenes/usuarios/img-lachina.jpg" alt="">
 							<div class="data">
 								<p class="user">
-									<strong> <a href="profile.html">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet.</p>
+									<strong> La China Suarez </a> </strong>
+									Todavia no lo probe</p>
 							</div>
 						</article>
 						<article>
-							<img src="https://via.placeholder.com/35" alt="">
+							<img src="/imagenes/usuarios/img-pampita.jpg" alt="">
 							<div class="data">
 								<p class="user">
-									<strong> <a href="profile.html">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Tempora doloribus enim aspernatur fugit corrupti suscipit sit dolore</p>
+									<strong> Pampita </strong>
+									Lo recomiendo</p>
 							</div>
 						</article>
 
