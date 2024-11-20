@@ -11,7 +11,7 @@ const userController = {
     },
     registerPost: function (req,res) {
         let formulario = req.body
-        formulario.contra = bcryptjs.hashSync(formulario.contra,10)
+        formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
 
         db.Usuario.create(formulario)
         .then(function () {
@@ -35,16 +35,16 @@ const userController = {
         if (formulario.email == "") {
             return res.send('La información en Email es incorrecta')
         } else{
-            if (formulario.contra == "") {
+            if (formulario.contraseña == "") {
                 return res.send('La información de Contraseña es incorrecta')   
                }else{
                 let filtrado = {
                     where: [{email: formulario.email},
-                    {contra: formulario.contra}]
+                    {contra: formulario.contraseña}]
                 }
                 db.Usuario.findOne(filtrado)
                 .then(function (result) {
-                        let check = bcryptjs.compareSync(formulario.contra, result.contra)
+                        let check = bcryptjs.compareSync(formulario.contraseña, result.contraseña)
                         if (check) {
                             req.session.user = result.dataValues;
                          return res.redirect('/')
