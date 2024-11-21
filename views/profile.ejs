@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link width="" rel="shortcut icon" href="/imagenes/img-logo.jpg" />
+
+	<title> Mercado Liebre Argentina</title>
+	<!-- Font Awesome Stylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<!-- Bootstrap Grid Stylesheet -->
+	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+	<!-- Own Stylesheet -->
+	<link rel="stylesheet" href="/stylesheets/app.css">
+</head>
+
+<body>
+	<%- include('./partials/headerLog') %>
+	<!-- Novedades -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Perfil</h2>
+                <h2 class="user">
+                    <strong>Usuario:</strong> <%= user.usuario %>
+                    <br>
+                    <strong>Mail:</strong> <%= user.email %></h2>
+			</div>
+            <div class="container products-wrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="products-title">Productos Publicados</h2>
+                    </div>
+                    <!-- Show the "ultimos" products -->
+                     <% if (products.length > 0	) {
+                        for (let index = 0; index < products.length; index++) {%>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="/products/detail/<%=products[index].id%>">
+                                <figure class="product-box_image">
+                                    <img src="/imagenes/productos/<%=products[index].imagen%>" alt="">
+                                </figure>
+                                <article class="product-box_data">
+                                    <h2><%=products[index].nombre%></h2>
+                                    <p><%=products[index].descripcion%></p>
+        
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+                    <%}} else {%>
+                        <h2>No hay productos</h2>
+                        <%}%> 
+                </div>
+            </div>
+			<!-- Show the "ultimos" products -->
+	<!-- footer -->
+     <%- include('./partials/footer') %>
+	<!-- /footer -->
+</body>
+
+</html>
