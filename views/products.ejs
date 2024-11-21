@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="/images/logo-mercado-liebre.jpg" />
+	<link width="" rel="shortcut icon" href="/imagenes/img-logo.jpg" />
 	
 	<title> Mercado Liebre Argentina</title>
 			<!-- Font Awesome Stylesheet -->
@@ -15,10 +15,14 @@
 	<link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 <body>
-    <%- include('./partials/header') %>
+	<% if (locals.user != undefined) {%>
+        <%- include('./partials/headerLog') %>
+    <%} else {%>
+        <%- include('./partials/header') %>
+    <%}%>
 	<!-- Banner -->
 	<div class="banner">
-		<img src="imagenes/img-banner.jpg" alt="Banner de ofertas">
+		<img src="/imagenes/img-banner.jpg" alt="Banner de ofertas">
 	</div>
 	<!-- /Banner -->
 
@@ -40,7 +44,7 @@
 						<article class="product-box_data">
 							<h2><%=products[index].nombre%></h2>
 							<p><%=products[index].descripcion%></p>
-							<p>Usuario: <%= products[index].usuarios.nombre %></p>
+							<p><a href="/users/perfil/<%= products[index].users.id %>"> <%= products[index].users.usuario %></a> </p>
 						</article>
 					</a>
 				</section>

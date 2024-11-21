@@ -1,12 +1,12 @@
 const db = require("../database/models");
-const products = db.Producto;
-const users = db.Usuario;
+const products = db.Product;
+const users = db.User;
 const op = db.Sequelize.Op;
 
 let productController = {
     index: function(req,res) {
         products.findAll({include: [
-            {association: "usuario"}
+            {association: "users"}
         ], order:[
             ["createdAt", "DESC"],
         ]})
@@ -20,7 +20,7 @@ let productController = {
     detail: function(req,res) {
         let id = req.params.id;
         products.findByPk(id, {include: [
-            {association: "usuario"}
+            {association: "users"}
         ]})
         .then(function(result){
             return res.render("product", {product: result})
@@ -35,7 +35,7 @@ let productController = {
     storeProduct: function(req,res) {
         let form = req.body;
         console.log(form)
-        //let userId = req.session.user.id; (poner cuando haga parte session)
+        userId = req.session.user.id; 
         if (form.imagen == "" || form.nombre == "" || form.desc == ""){
             return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario") //preguntar si esta bien validado asi
         } else {
@@ -43,7 +43,7 @@ let productController = {
                 imagen: form.imagen,
                 nombre: form.nombre,
                 descripcion: form.desc,
-                id_user: 1 //userId (poner cuando haga parte session)
+                id_user: userId
             })
             return res.redirect('/products');
         }
@@ -51,7 +51,7 @@ let productController = {
     search: function(req,res){
         let search = req.query.search;
         products.findAll({include: [
-            {association: "usuario"}
+            {association: "users"}
         ], where: [
                 {nombre: {[op.like]:`%${search}%`}},
             ], order:[
