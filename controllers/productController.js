@@ -37,7 +37,7 @@ let productController = {
         console.log(form)
         userId = req.session.user.id; 
         if (form.imagen == "" || form.nombre == "" || form.desc == ""){
-            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario") //preguntar si esta bien validado asi
+            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario")
         } else {
             products.create({
                 imagen: form.imagen,
@@ -45,7 +45,12 @@ let productController = {
                 descripcion: form.desc,
                 id_user: userId
             })
-            return res.redirect('/products');
+            .then(function(result){
+                return res.redirect('/products');
+            })
+            .catch(function(err){
+                return console.log(err)
+            })
         }
     },
     search: function(req,res){

@@ -2,31 +2,24 @@
 <html lang="es">
 <!-- Include Head -->
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="/imagenes/img-logo.jpg" />
-
-	<title> Mercado Liebre Argentina</title>
-	<!-- Font Awesome Stylesheet -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
-	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="/stylesheets/app.css">
-</head>
+<%- include('./partials/head') %>
 
 <body>
-	<%- include('./partials/headerLog') %>
+    <% if (locals.user != undefined) {%>
+        <%- include('./partials/headerLog') %>
+    <%} else {%>
+        <%- include('./partials/header') %>
+    <%}%>
+    
 	<!-- Novedades -->
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="products-title">Perfil</h2>
                 <h2 class="user">
-                    <strong>Usuario:</strong> <%= user.usuario %>
+                    <strong>Usuario:</strong> <%= perfil.usuario %>
                     <br>
-                    <strong>Mail:</strong> <%= user.email %></h2>
+                    <strong>Mail:</strong> <%= perfil.email %></h2>
 			</div>
             <div class="container products-wrapper">
                 <div class="row">
