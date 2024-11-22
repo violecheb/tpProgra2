@@ -6,15 +6,32 @@ const userController = {
             return res.render('register')
     },
     registerPost: function (req,res) {
+        let errores = []
         let formulario = req.body
         formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
-
+        if (formulario.email == '') {
+            errores.push ('Debe ingresar un mail')
+        }
+        if (formulario.usuario == '') {
+            errores.push('Debe ingresar un nombre de usuario')
+        }
+        if (formulario.contraseña == '') {
+            errores.push('Debe ingresar una contraseña')
+        }
+        if (errores.length > 0) {
+            let errorMensaje = '';
+            for (let i = 0; i < errores.length; i++) {
+                errorMensaje += errores[i] + '<br>'
+                
+            }
+            return res.send(errorMensaje)
+        }
         db.User.create(formulario)
         .then(function () {
             return res.redirect('/users/login')
         })
         .catch(function (error) {
-            console.log(error);
+            return res.send('Este mail ya esta registrado. Elija otro')
             
         })
         
