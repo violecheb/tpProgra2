@@ -3,17 +3,13 @@ const bcryptjs = require('bcryptjs');
 
 const userController = {
     register: function (req,res) {
-        if (req.session.user != undefined) {
-            return res.redirect('/')
-        }else{
             return res.render('register')
-        }
     },
     registerPost: function (req,res) {
         let formulario = req.body
         formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
 
-        db.Usuario.create(formulario)
+        db.User.create(formulario)
         .then(function () {
             return res.redirect('/users/login')
         })
@@ -24,11 +20,8 @@ const userController = {
         
     },
     login: function (req,res) {
-        if (req.session.user != undefined) {
-            return res.redirect('/')
-        }else{
             return res.render('login')
-        }
+
     },
     loginPost: function (req,res) {
         let formulario = req.body
@@ -42,7 +35,7 @@ const userController = {
                     where: [{email: formulario.email},
                     {contra: formulario.contraseña}]
                 }
-                db.Usuario.findOne(filtrado)
+                db.User.findOne(filtrado)
                 .then(function (result) {
                         let check = bcryptjs.compareSync(formulario.contraseña, result.contraseña)
                         if (check) {
@@ -61,7 +54,7 @@ const userController = {
     },
     logout: function (req,res) {
        req.session.destroy();
-       return res.redirect ('/') 
+       return res.redirect ('/products') 
     }
 }
 
