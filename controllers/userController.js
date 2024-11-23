@@ -14,8 +14,7 @@ const userController = {
             return res.redirect('/users/login')
         })
         .catch(function (error) {
-            console.log(error);
-            
+            console.log(error);  
         })
         
     },

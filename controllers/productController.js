@@ -30,14 +30,19 @@ let productController = {
         })
     },
     addProduct: function(req,res) {
-        return res.render("addProduct")
+        if(req.session.user == undefined ){
+            return res.redirect('/products')
+        } else {
+            return res.render("addProduct")
+        }
+
     },
     storeProduct: function(req,res) {
         let form = req.body;
         console.log(form)
         userId = req.session.user.id; 
         if (form.imagen == "" || form.nombre == "" || form.desc == ""){
-            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario")
+            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario") //preguntar si esta bien validado asi
         } else {
             products.create({
                 imagen: form.imagen,
