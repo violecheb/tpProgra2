@@ -19,5 +19,8 @@ router.post ('/login', userController.loginPost);
 /* Sufijo logout*/
 router.post('/logout', userController.logout)
 
+/* ruta a perfil*/
+router.get("/perfil/:id", userController.perfil)
+
 
 module.exports = router;

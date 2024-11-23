@@ -72,6 +72,19 @@ const userController = {
     logout: function (req,res) {
        req.session.destroy();
        return res.redirect ('/products') 
+    },
+    perfil: function(req, res){
+        let id = req.params.id;
+        db.User.findByPk(id, {include: [
+            {association: "products"}
+        ]})
+        .then(function(result){
+            let products = result.products;
+            return res.render("profile", {perfil: result, products: products})
+        })
+        .catch(function(err){
+            return console.log(err)
+        })
     }
 }
 
