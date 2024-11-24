@@ -37,38 +37,37 @@ const userController = {
         
     },
     login: function (req,res) {
-            return res.render('login')
+       if (req.session.user != undefined) {
+        return res.redirect('/')
+       } else {
+        return res.render('login');
+       }   
 
     },
     loginPost: function (req,res) {
         let formulario = req.body
-        if (formulario.email == "") {
-            return res.send('La información en Email es incorrecta')
-        } else{
-            if (formulario.contraseña == "") {
-                return res.send('La información de Contraseña es incorrecta')   
-               }else{
                 let filtrado = {
-                    where: [{email: formulario.email},
-                    {contra: formulario.contraseña}]
-                }
+                    where: {email: formulario.email},}
                 db.User.findOne(filtrado)
                 .then(function (result) {
+                    if (!result) {
+                        return res.send('La información en Email es incorrecta')
+                    }else{
                         let check = bcryptjs.compareSync(formulario.contraseña, result.contraseña)
                         if (check) {
                             req.session.user = result.dataValues;
-                         return res.redirect('/')
+                         return res.redirect('/products')
+                        } else{
+                            return res.send('La contraseña es incorrecta')
                         }
-                
+                    }    
                 })
                 .catch(function (error) {
                     console.log(error);
                     
                 })
-               }
-        }
                
-    },
+        },
     logout: function (req,res) {
        req.session.destroy();
        return res.redirect ('/products') 

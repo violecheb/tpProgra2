@@ -15,55 +15,18 @@
 				<h2 class="products-title">Ingresar</h2>
 			</div>
     
-    <form action="/users/login" method="post">
-        <div>Ingresar</div>
-        <div>
-            <input id="email" class="form-input" type="email" name="email" placeholder="email"  required/>
-        </div>
-        <div>
-            <input id="password" class="form-input" type="password" name="contraseña" placeholder="Clave" required />
-        </div>
-        <div>
-            <label class="form-label">Recordarme</label>
-            <input id="recordarme" class="form-input" type="checkbox" name="recordarme"  placeholder="recordarme">
-        </div>
-        <div>
-            <button type="submit" class="submit">Ingresar</button>
-        </div>
-    </form>
+			<form action="/users/login" method="post">
+                <label>email: </label><input type="email" name="email" value=""> <br>
+				<br>
+                <label>Contraseña:  </label><input type="password" name="contraseña" value=""><br>
+				<br>
+                <label>Recordar la contraseña </label><input type="checkbox" name="check" value=""><br>
+				<br>
+				<button type="submit">Iniciar sesion</button>
+            </form>
 
 	<!-- footer -->
-	<footer class="main-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-lg-4">
-					<article class="footer-data">
-						<i class="fas fa-credit-card"></i>
-						<h2>Pagá con tarjeta o en efectivo</h2>
-						<p>Con Mercado Liebre Cash, tenés cuotas sin interés con tarjeta o efectivo en puntos de pago.
-							¡Y
-							siempre es seguro!</p>
-					</article>
-				</div>
-				<div class="col-12 col-lg-4">
-					<article class="footer-data">
-						<i class="fas fa-gift"></i>
-						<h2>Envío gratis desde $ 1.999</h2>
-						<p>Solo por estar registrado en Mercado Liebre tenés envíos gratis en miles de productos. Es un
-							beneficio de Mercado Puntos.</p>
-					</article>
-				</div>
-				<div class="col-12 col-lg-4">
-					<article class="footer-data">
-						<i class="fas fa-user-shield"></i>
-						<h2>Seguridad, de principio a fin</h2>
-						<p>¿No te gusta? ¡Devolvelo! En Mercado Liebre, no hay nada que no puedas hacer, porque estás
-							siempre protegido.</p>
-					</article>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<%- include('./partials/footer') %>
 	<!-- /footer -->
 </body>
 
