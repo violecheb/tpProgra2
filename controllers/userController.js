@@ -3,12 +3,11 @@ const bcryptjs = require('bcryptjs');
 
 const userController = {
     register: function (req,res) {
-            return res.render('register')
+        return res.render('register');
     },
     registerPost: function (req,res) {
         let errores = []
         let formulario = req.body
-        formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
         if (formulario.email == '') {
             errores.push ('Debe ingresar un mail')
         }
@@ -26,6 +25,7 @@ const userController = {
             }
             return res.send(errorMensaje)
         }
+        formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
         db.User.create(formulario)
         .then(function () {
             return res.redirect('/users/login')
@@ -38,7 +38,7 @@ const userController = {
     },
     login: function (req,res) {
        if (req.session.user != undefined) {
-        return res.redirect('/')
+        return res.redirect('/products')
        } else {
         return res.render('login');
        }   
@@ -46,12 +46,28 @@ const userController = {
     },
     loginPost: function (req,res) {
         let formulario = req.body
+        let errores = [];
+        if(formulario.email == ""){
+            errores.push("Debe ingresar un mail.");
+        }
+
+        if(formulario.contraseña == ""){
+            errores.push("Debe ingresar una contraseña.")
+        }
+
+        if (errores.length > 0){
+            let errorMensaje = "";
+            for (let i =0; i < errores.length; i++){
+                errorMensaje += errores[i] + "<br>" ;
+            }
+            return res.send(errorMensaje);
+        }
                 let filtrado = {
                     where: {email: formulario.email},}
                 db.User.findOne(filtrado)
                 .then(function (result) {
                     if (!result) {
-                        return res.send('La información en Email es incorrecta')
+                        return res.send('No existe un usuario con ese mail.')
                     }else{
                         let check = bcryptjs.compareSync(formulario.contraseña, result.contraseña)
                         if (check) {
@@ -68,7 +84,7 @@ const userController = {
                 })
                
         },
-    logout: function (req,res) {
+    logout: function (req,res) { 
        req.session.destroy();
        return res.redirect ('/products') 
     },

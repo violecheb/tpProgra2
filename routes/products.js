@@ -6,16 +6,16 @@ let productController = require("../controllers/productController");
 //home del sitio
 router.get("/", productController.index);
 
-//detalle producto
+//Ruta para mostrar el detalle de un producto
 router.get("/detail/:id", productController.detail);
 
-//agregar productos
+//Ruta para agregar un producto
 router.get("/add", productController.addProduct);
 
-// ruta por POST que procesa la información del formulario "agregar producto"
+//Ruta por POST que procesa la información del formulario "agregar producto"
 router.post("/store", productController.storeProduct)
 
-//resultados de busqueda
+//Ruta para mostrar los resultados de búsqueda
 router.get("/search", productController.search)
 
 module.exports = router;

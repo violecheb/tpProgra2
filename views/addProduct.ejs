@@ -10,18 +10,19 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Agregar productos</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
+				<h2 class="products-title">Agregar producto</h2>
+			
 			 <form action="/products/store" method="POST">
 				<label>Nombre del producto  </label><input type="text" name="nombre" value=""> <br>
 				<br>
-				<label>Descripcion del producto  </label><input type="text" name="desc" value=""> <br>
+				<label>Imagen del producto (nombre del archivo)  </label><input type="text" name="imagen" value=""><br>
 				<br>
-                <label>Imagen del producto (nombre del archivo)  </label><input type="text" name="imagen" value=""><br>
+				<label>Descripcion del producto  </label><br>
+				<textarea name="desc"></textarea>
+				<br>
 				<br>
 				<button type="submit">Agregar Producto</button>
-             </form>
+             </form></div>
 	<!-- footer -->
      <%- include('./partials/footer') %>
 	<!-- /footer -->
