@@ -1,14 +1,13 @@
 const db = require("../database/models");
-const products = db.Product;
-const users = db.User;
-const op = db.Sequelize.Op;
+const products = db.Product; 
+const op = db.Sequelize.Op; 
 
 let productController = {
     index: function(req,res) {
         products.findAll({include: [
             {association: "users"}
         ], order:[
-            ["createdAt", "DESC"],
+            ["createdAt", "DESC"]
         ]})
         .then(function(result){
             return res.render("products", {products: result})
@@ -41,8 +40,8 @@ let productController = {
         let form = req.body;
         console.log(form)
         userId = req.session.user.id; 
-        if (form.imagen == "" || form.nombre == "" || form.desc == ""){
-            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario") //preguntar si esta bien validado asi
+        if (form.imagen == "" || form.nombre == "" || form.desc == ""){ //si cualquiera de los campos de agregar product esta vacio, envia mensaje de error
+            return res.send("Todos los campos son obligatorios. Vuelva a completar el formulario") 
         } else {
             products.create({
                 imagen: form.imagen,

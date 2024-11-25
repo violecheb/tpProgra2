@@ -6,9 +6,10 @@ const userController = {
         return res.render('register');
     },
     registerPost: function (req,res) {
-        let errores = []
-        let formulario = req.body
-        if (formulario.email == '') {
+        let errores = []  //iniciamos un array vacio para almacenar mensajes de error
+        let formulario = req.body //obtenemos los datos del form
+        //validamos que los campos no esten vacios
+        if (formulario.email == '') { 
             errores.push ('Debe ingresar un mail')
         }
         if (formulario.usuario == '') {
@@ -16,14 +17,15 @@ const userController = {
         }
         if (formulario.contraseña == '') {
             errores.push('Debe ingresar una contraseña')
-        }
+        } 
+        //si alguno de los campos esta vacio, entra al if.
         if (errores.length > 0) {
-            let errorMensaje = '';
-            for (let i = 0; i < errores.length; i++) {
-                errorMensaje += errores[i] + '<br>'
+            let errorMensaje = ''; // iniciamos una cadena vacia para contruir el mensaje final
+            for (let i = 0; i < errores.length; i++) { //recorremos el array de errores
+                errorMensaje += errores[i] + '<br>'  //cada mensaje de error se concatena en la cadena con un salto de linea
                 
             }
-            return res.send(errorMensaje)
+            return res.send(errorMensaje)  //enviamos el mensaje de error como respuesta al cliente
         }
         formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
         db.User.create(formulario)
@@ -55,7 +57,7 @@ const userController = {
             errores.push("Debe ingresar una contraseña.")
         }
 
-        if (errores.length > 0){
+        if (errores.length > 0){ //lo mismo que en register. lo usamos para poder enviar al cliente todos los errores especificos.
             let errorMensaje = "";
             for (let i =0; i < errores.length; i++){
                 errorMensaje += errores[i] + "<br>" ;
@@ -86,7 +88,7 @@ const userController = {
         },
     logout: function (req,res) { 
        req.session.destroy();
-       return res.redirect ('/products') 
+       return res.redirect ('/products')
     },
     perfil: function(req, res){
         let id = req.params.id;
