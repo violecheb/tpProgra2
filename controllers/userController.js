@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs');
 
 const userController = {
     register: function (req,res) {
-        return res.render('register');
+        return res.render('register'); 
     },
     registerPost: function (req,res) {
         let errores = []  //iniciamos un array vacio para almacenar mensajes de error
