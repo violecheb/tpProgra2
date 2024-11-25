@@ -3,12 +3,16 @@ const bcryptjs = require('bcryptjs');
 
 const userController = {
     register: function (req,res) {
-        return res.render('register'); 
+        if (req.session.user != undefined) {
+            return res.redirect('/products')
+           } else {
+            return res.render('register');
+           }    
     },
     registerPost: function (req,res) {
-        let errores = []  //iniciamos un array vacio para almacenar mensajes de error
-        let formulario = req.body //obtenemos los datos del form
-        //validamos que los campos no esten vacios
+        let errores = []  //Iniciamos un array vacio para almacenar mensajes de error
+        let formulario = req.body //Obtenemos los datos del form
+        //Validamos que los campos no esten vacios
         if (formulario.email == '') { 
             errores.push ('Debe ingresar un mail')
         }
@@ -18,14 +22,14 @@ const userController = {
         if (formulario.contraseña == '') {
             errores.push('Debe ingresar una contraseña')
         } 
-        //si alguno de los campos esta vacio, entra al if.
+        //Si alguno de los campos esta vacio, entra al if.
         if (errores.length > 0) {
-            let errorMensaje = ''; // iniciamos una cadena vacia para contruir el mensaje final
-            for (let i = 0; i < errores.length; i++) { //recorremos el array de errores
-                errorMensaje += errores[i] + '<br>'  //cada mensaje de error se concatena en la cadena con un salto de linea
+            let errorMensaje = ''; // Iniciamos una cadena vacia para contruir el mensaje final
+            for (let i = 0; i < errores.length; i++) { //Recorremos el array de errores
+                errorMensaje += errores[i] + '<br>'  //Cada mensaje de error se concatena en la cadena con un salto de linea
                 
             }
-            return res.send(errorMensaje)  //enviamos el mensaje de error como respuesta al cliente
+            return res.send(errorMensaje)  //Enviamos el mensaje de error como respuesta al cliente
         }
         formulario.contraseña = bcryptjs.hashSync(formulario.contraseña,10)
         db.User.create(formulario)
@@ -57,7 +61,7 @@ const userController = {
             errores.push("Debe ingresar una contraseña.")
         }
 
-        if (errores.length > 0){ //lo mismo que en register. lo usamos para poder enviar al cliente todos los errores especificos.
+        if (errores.length > 0){ //Lo mismo que en register. lo usamos para poder enviar al cliente todos los errores especificos.
             let errorMensaje = "";
             for (let i =0; i < errores.length; i++){
                 errorMensaje += errores[i] + "<br>" ;
